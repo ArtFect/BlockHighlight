@@ -7,3 +7,4 @@ softdepend: [PlaceholderAPI]
 commands:
   blockhightlight:
     aliases: bh
+    usage: "Usage: /bh [reload | stop | run]"

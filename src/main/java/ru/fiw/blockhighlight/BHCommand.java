@@ -19,6 +19,9 @@ public class BHCommand implements CommandExecutor, TabCompleter {
     private Config config;
 
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
+        if(args.length < 1){
+            return false;
+        }
         if (args[0].equals("reload") && commandSender.hasPermission("blockhighlight.reload")) {
             config.loadConfig();
             Util.sendStopToAll();
@@ -29,14 +32,14 @@ public class BHCommand implements CommandExecutor, TabCompleter {
         } else if (args[0].equals("run") && commandSender.hasPermission("blockhighlight.run")) {
             if (args.length < 2) {
                 commandSender.sendMessage(ChatColor.RED + "Specify the name of the animation. Example usage /bh run test");
-                return false;
+                return true;
             }
 
             String animName = args[1];
             Animation animation = config.animations.get(animName);
             if (animation == null) {
                 commandSender.sendMessage(ChatColor.RED + "No animation with name " + animName + " was found!");
-                return false;
+                return true;
             }
 
             if (args.length == 2) {
@@ -54,7 +57,7 @@ public class BHCommand implements CommandExecutor, TabCompleter {
                     startAnimation(player, animation);
                 } else {
                     commandSender.sendMessage(ChatColor.RED + "Player " + args[2] + " was not found!");
-                    return false;
+                    return true;
                 }
             }
         } else if (args[0].equals("stop") && commandSender.hasPermission("blockhighlight.stop")) {
@@ -73,7 +76,7 @@ public class BHCommand implements CommandExecutor, TabCompleter {
                 pl = Bukkit.getPlayerExact(args[1]);
                 if(pl == null){
                     commandSender.sendMessage(ChatColor.RED + "Player " + args[1] + " was not found!");
-                    return false;
+                    return true;
                 }
             }
 
