@@ -1,0 +1,9 @@
+name: BlockHighlight
+main: ru.fiw.blockhighlight.Main
+version: 1.0
+author: Fiw
+depend: [ProtocolLib]
+softdepend: [PlaceholderAPI]
+commands:
+  blockhightlight:
+    aliases: bh

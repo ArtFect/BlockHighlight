@@ -1,0 +1,41 @@
+#Should the highlight be always hidden behind the blocks
+always-hide-behind-blocks: true
+repeat-animations:
+  #The repeat name can be any, as long as there no two repeats with same name
+  '1':
+    animation: test
+    repeat-every: 30
+animations:
+  'test':
+    #The world in which this animation will be shown
+    world: 'world'
+    #From what distance will the animation be visible. Optional, if not specified, it will be 4096
+    view-distance-squared: 4096
+    frames:
+      #This is the number of the tick on which the desired highlight is performed after animation start
+      0:
+        #The highlight is specified in the format: x y z, color, transparency (from 0 to 255), text, time (In milliseconds. How long will this highlight last)
+        - "99 64 100, #37db97, 100, , 800"
+        - "100 64 100, #37db97, 100, , 800"
+        - "101 64 100, #37db97, 100, , 800"
+      3:
+        - "99 64 101, #3dbf89, 130, , 800"
+        - "100 64 101, #3dbf89, 130, , 800"
+        - "101 64 101, #3dbf89, 130, , 800"
+      6:
+        - "99 64 102, #3a9972, 160, , 800"
+        - "100 64 102, #3a9972, 160, , 800"
+        - "101 64 102, #3a9972, 160, , 800"
+      9:
+        - "99 64 103, #28805b, 190, , 800"
+        - "100 64 103, #28805b, 190, , 800"
+        - "101 64 103, #28805b, 190, , 800"
+      12:
+        - "99 64 104, #20543e, 220, , 800"
+        - "100 64 104, #20543e, 220, , 800"
+        - "101 64 104, #20543e, 220, , 800"
+  'text':
+    world: 'world'
+    frames:
+      0:
+        - "104 64 101, #37db97, 0, &cHello, 10000"
