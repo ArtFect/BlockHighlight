@@ -8,7 +8,6 @@ version '1.0'
 sourceCompatibility = 1.8
 
 jar {
-//    destinationDirectory.set(file("C:/Users/1234/Desktop/1.16.4 test/plugins"))
     destinationDirectory.set(file("${buildDest}"))
 }
 
