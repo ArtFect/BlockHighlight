@@ -27,6 +27,7 @@ public class Config {
     public void loadConfig() {
         main.saveDefaultConfig();
         this.stopAllRepeats();
+        animations.clear();
 
         YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(main.getDataFolder(), "config.yml"));
         alwaysHideBehindBlocks = config.getBoolean("always-hide-behind-blocks");
