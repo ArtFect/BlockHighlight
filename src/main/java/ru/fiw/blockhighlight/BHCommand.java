@@ -63,7 +63,12 @@ public class BHCommand implements CommandExecutor, TabCompleter {
         } else if (args[0].equals("stop") && commandSender.hasPermission("blockhighlight.stop")) {
             Player pl;
             if (args.length < 2) {
-                pl = (Player) commandSender;
+                if(commandSender instanceof Player){
+                    pl = (Player) commandSender;
+                } else {
+                    commandSender.sendMessage(ChatColor.RED + "Can't stop animations for console. Specify the player to stop the animation for or 'all'");
+                    return true;
+                }
             } else {
                 if (args[1].equals("all")) {
                     Util.sendStopToAll();
