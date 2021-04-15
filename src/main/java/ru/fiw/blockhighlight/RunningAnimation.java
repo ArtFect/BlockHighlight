@@ -21,6 +21,8 @@ public class RunningAnimation {
             return;
         }
 
+        if(!pl.getWorld().equals(animation.location.getWorld())) return;
+
         if (pl.getLocation().distanceSquared(animation.location) < animation.viewDistanceSquared || force) {
             for (BlockHighlight frame : animationFrames) {
                 Util.sendBlockHighlight(pl, frame);
