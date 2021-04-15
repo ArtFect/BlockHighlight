@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -89,6 +90,13 @@ public class BHCommand implements CommandExecutor, TabCompleter {
             if (config.alwaysHideBehindBlocks) {
                 Util.sendHideBehindBlocksAlways(pl);
             }
+        } else if(args[0].equals("list") && commandSender.hasPermission("blockhighlight.list")){
+            commandSender.sendMessage("BlockHighlight animations (" + ChatColor.GREEN + config.animations.size() + ChatColor.WHITE + "):");
+            for(String name : config.animations.keySet()){
+                Animation an = config.animations.get(name);
+                Location loc = an.location;
+                commandSender.sendMessage(ChatColor.WHITE + " - " + ChatColor.YELLOW + name + ChatColor.WHITE +" (x:" + loc.getBlockX() + ", y:" + loc.getBlockY() + ", z:" + loc.getBlockZ() + ", world: \"" + loc.getWorld().getName() + "\")");
+            }
         }
         return true;
     }
@@ -100,7 +108,7 @@ public class BHCommand implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] args) {
         if (args.length == 1) {
-            return Arrays.asList("run", "stop", "reload");
+            return Arrays.asList("run", "stop", "reload", "list");
         } else if (args.length == 2) {
             if (args[0].equals("run")) {
                 return Lists.newArrayList(config.animations.keySet());
