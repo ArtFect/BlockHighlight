@@ -18,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BHCommand implements CommandExecutor, TabCompleter {
     private Config config;
+    private Main main;
 
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if(args.length < 1){
@@ -44,18 +45,18 @@ public class BHCommand implements CommandExecutor, TabCompleter {
             }
 
             if (args.length == 2) {
-                startAnimation((Player) commandSender, animation);
+                main.startAnimation((Player) commandSender, animation);
             } else {
                 if (args[2].equals("all")) {
                     for (Player pl : Bukkit.getOnlinePlayers()) {
-                        startAnimation(pl, animation);
+                        main.startAnimation(pl, animation);
                     }
                     return true;
                 }
 
                 Player player = Bukkit.getPlayerExact(args[2]);
                 if (player != null) {
-                    startAnimation(player, animation);
+                    main.startAnimation(player, animation);
                 } else {
                     commandSender.sendMessage(ChatColor.RED + "Player " + args[2] + " was not found!");
                     return true;
@@ -99,10 +100,6 @@ public class BHCommand implements CommandExecutor, TabCompleter {
             }
         }
         return true;
-    }
-
-    private void startAnimation(Player pl, Animation animation) {
-        Main.runningAnimations.add(new RunningAnimation(animation, pl));
     }
 
     @Override

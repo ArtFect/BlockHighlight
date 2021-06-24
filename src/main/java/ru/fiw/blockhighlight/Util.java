@@ -8,6 +8,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class Util {
+    private static boolean placeholderApiLoaded = false;
+
+    static {
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            placeholderApiLoaded = true;
+        }
+    }
+
     public static void sendStopToAll() {
         for (Player pl : Bukkit.getOnlinePlayers()) {
             sendStop(pl);
@@ -34,7 +42,7 @@ public class Util {
         packet.writeInt(highlight.getColor());
 
         String text = ChatColor.translateAlternateColorCodes('&', highlight.getText());
-        if (Main.placeholderApiLoaded) {
+        if (Util.placeholderApiLoaded) {
             PacketUtil.writeString(packet, PlaceholderAPI.setPlaceholders(pl, text));
         } else {
             PacketUtil.writeString(packet, text);

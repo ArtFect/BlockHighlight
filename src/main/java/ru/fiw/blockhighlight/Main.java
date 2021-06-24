@@ -1,6 +1,7 @@
 package ru.fiw.blockhighlight;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -11,8 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Main extends JavaPlugin implements Listener {
-    public static ArrayList<RunningAnimation> runningAnimations = new ArrayList<>();
-    public static boolean placeholderApiLoaded = false;
+    private static ArrayList<RunningAnimation> runningAnimations = new ArrayList<>();
     private Config config;
 
     public void onEnable() {
@@ -23,10 +23,7 @@ public class Main extends JavaPlugin implements Listener {
         }
         Bukkit.getPluginManager().registerEvents(this, this);
 
-        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            placeholderApiLoaded = true;
-        }
-        getCommand("blockhightlight").setExecutor(new BHCommand(config));
+        getCommand("blockhightlight").setExecutor(new BHCommand(config, this));
 
         new BukkitRunnable() {
             @Override
@@ -43,6 +40,10 @@ public class Main extends JavaPlugin implements Listener {
                 }
             }
         }.runTaskTimer(this, 1, 1);
+    }
+
+    public void startAnimation(Player pl, Animation animation) {
+        runningAnimations.add(new RunningAnimation(animation, pl));
     }
 
     @EventHandler
